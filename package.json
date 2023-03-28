@@ -1,0 +1,20 @@
+{
+    "name": "mail-app",
+    "version": "1.0.0",
+    "author": "Aquib",
+    "description": "",
+    "main": "mail.js",
+    "license": "ISC",
+    "scripts": {
+        "start": "node mail.js",
+        "dev": "nodemon mail.js"
+    },
+    "dependencies": {
+        "axios": "^1.3.4",
+        "dotenv": "^16.0.3",
+        "express": "^4.18.2",
+        "googleapis": "^114.0.0",
+        "mongodb": "^5.1.0",
+        "nodemailer": "^6.9.1"
+    }
+}
