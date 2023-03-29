@@ -6,7 +6,7 @@ const OAuth2 = google.auth.OAuth2;
 const OAuth2_client = new OAuth2(process.env.clientID, process.env.clientSecret);
 OAuth2_client.setCredentials({ refresh_token: process.env.refreshToken });
 
-exports.sendMail = async function sendMail(name, recipient) {
+exports.sendMail = async function sendMail(recipient) {
     const accessToken = OAuth2_client.getAccessToken();
     const transport = createTransport({
         service: "gmail",
@@ -23,11 +23,10 @@ exports.sendMail = async function sendMail(name, recipient) {
     const option = {
         from: `Aquib Alam ${process.env.user}`,
         to: recipient,
-        subject: "A test message from Aquib Alam",
-        text: "Hello there brother",
-        html: `<h1>Your OTP is ${otp}</h1>`,
+        subject: "Mail App",
+        text: "",
+        html: `<h1>Thank you for using our app<br/>Your OTP is ${otp}</h1>`,
     };
-    console.log(option);
-    return await transport.sendMail(option);
+    await transport.sendMail(option);
+    return otp;
 };
-sd
