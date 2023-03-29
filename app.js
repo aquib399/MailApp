@@ -16,13 +16,15 @@ app.post("/submit", async (req, res) => {
     try {
         const reply = await db.findOne(req.body);
         if (reply) {
+            console.table({ status: "found" });
             res.send({ status: "found" });
             return;
         }
         otp = await mail.sendMail(req.body.mail);
-        console.log("otp is :", otp);
+        console.table("otp is :", otp);
         res.send({ status: "sent" });
     } catch (e) {
+        console.table({ status: "error" });
         res.send({ status: "error" });
     }
 });
@@ -30,16 +32,21 @@ app.post("/insert", async (req, res) => {
     try {
         const reply = await db.findOne(req.body);
         if (reply) {
+            console.table({ status: "found" });
             res.send({ status: "found" });
             return;
         }
         await db.insertOne(req.body);
+
+        console.table({ status: "inserted" });
         res.send({ status: "inserted" });
     } catch (e) {
+        console.table({ status: "error" });
         res.send({ status: "error" });
     }
 });
 app.post("/getOtp", (req, res) => {
+    console.table({ otp: otp });
     res.send({ otp: otp });
 });
 app.listen(process.env.PORT);
