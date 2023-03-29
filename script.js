@@ -14,8 +14,15 @@ sendBtn.addEventListener("click", async () => {
     console.log("Sending mail to : ", mail.value);
     type.body = JSON.stringify({ mail: mail.value });
     const res = await fetch("/submit", type);
-    const data = await r1es.json();
-    console.log();
+    const data = await res.json();
+    if (data.status == "found") {
+        console.log("Mail already registered");
+        return;
+    }
+    if (data.status == "error") {
+        console.error("Error whlie sending email to", mail.value);
+        return;
+    }
     console.log("Sent successfully", JSON.stringify(data));
 });
 
@@ -48,6 +55,6 @@ checkBtn.addEventListener("click", async () => {
     let str = "";
     let cnt = 0;
     const x = setInterval(() => {
-        len > cnt ? ((str += msg[cnt++]), (pg.innerHTML = str)) : clearInterval(x);
-    }, 100);
+        len > cnt ? ((str += msg[cnt++]), (pg.innerHTML = str + "_")) : (clearInterval(x), (pg.innerHTML = str));
+    }, 80);
 })();
