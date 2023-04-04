@@ -18,28 +18,30 @@ sendBtn.addEventListener("click", async () => {
         alert("Mail Already Registered");
         return;
     }
-    if (data.status == 301) {
+    if (data.status == 500) {
         alert("Error while sending mail...Please check the mail again..");
         return;
     }
     alert("Otp sent");
 });
-
 checkBtn.addEventListener("click", async () => {
-    type.body = JSON.stringify({ otp: otp.value });
+    type.body = JSON.stringify({ mail: mail.value, otp: otp.value });
     const res = await fetch("/insert", type);
     const data = await res.json();
-    if (data.status == 303) {
+    if (data.status == 203) {
         alert("Send OTP First");
         return;
     }
-
+    if (data.status == 401) {
+        alert("Wrong OTP");
+        return;
+    }
     if (data.status == 302) {
         alert("Mail Already Registered");
         return;
     }
-    if (data.status == 301) {
-        alert("Wrong OTP");
+    if (data.status == 500) {
+        alert("Error while Verifying");
         return;
     }
     alert("Verified");

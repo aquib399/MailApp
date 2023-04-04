@@ -25,7 +25,7 @@ exports.sendMail = async function sendMail(recipient) {
         to: recipient,
         subject: "Mail App",
         text: "",
-        html: `<h1>Thank you for using our app<br/>Your OTP is ${otp}</h1>`,
+        html: `<center><h1>Thank you for using our app<br/>Your OTP is ${otp}</h1></center>`,
     };
     await transport.sendMail(option);
     return otp;
