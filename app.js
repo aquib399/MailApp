@@ -7,6 +7,7 @@ const db = client.db("MailApp").collection("data");
 app.use(express.json());
 app.use(express.static(__dirname));
 client.connect();
+let mail;
 let otp;
 let flag = false;
 
@@ -16,12 +17,13 @@ app.get("/", (req, res) => {
 });
 
 app.post("/send", async (req, res) => {
+    mail = req.body.mail;
     try {
-        if (await db.findOne({ mail: req.body.mail })) {
+        if (await db.findOne({ mail })) {
             res.send({ status: 302 });
             return;
         }
-        otp = await require("./mail").sendMail(req.body.mail);
+        otp = await require("./mail").sendMail(mail);
         flag = true;
         res.send({ status: 200 });
     } catch (e) {
@@ -35,11 +37,11 @@ app.post("/insert", async (req, res) => {
     }
     if (otp == req.body.otp) {
         try {
-            if (await db.findOne({ mail: req.body.mail })) {
+            if (await db.findOne({ mail })) {
                 res.send({ status: 302 });
                 return;
             }
-            await db.insertOne({ mail: req.body.mail });
+            await db.insertOne({ mail });
             flag = false;
             res.send({ status: 200 });
         } catch (e) {

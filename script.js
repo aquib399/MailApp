@@ -25,7 +25,7 @@ sendBtn.addEventListener("click", async () => {
     alert("OTP sent");
 });
 checkBtn.addEventListener("click", async () => {
-    type.body = JSON.stringify({ mail: mail.value, otp: otp.value });
+    type.body = JSON.stringify({ otp: otp.value });
     const res = await fetch("/insert", type);
     const data = await res.json();
     if (data.status == 203) {
