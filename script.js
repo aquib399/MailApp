@@ -11,44 +11,40 @@ const type = {
 };
 
 sendBtn.addEventListener("click", async () => {
-    console.log("Sending mail to : ", mail.value);
     type.body = JSON.stringify({ mail: mail.value });
-    const res = await fetch("/submit", type);
+    const res = await fetch("/send", type);
     const data = await res.json();
-    if (data.status == "found") {
-        console.log("Mail already registered");
+    if (data.status == 302) {
+        alert("Mail Already Registered");
         return;
     }
-    if (data.status == "error") {
-        console.error("Error whlie sending email to", mail.value);
+    if (data.status == 301) {
+        alert("Error while sending mail...Please check the mail again..");
         return;
     }
-    console.log("Sent successfully", JSON.stringify(data));
+    alert("Otp sent");
 });
 
 checkBtn.addEventListener("click", async () => {
-    console.log("Verifying OTP");
-    try {
-        const res = await fetch("/getOtp", type);
-        const data = await res.json();
-        if (otp.value == data.otp) {
-            const r = await fetch("/insert", type);
-            const d = await r.json();
-            if (d.status == "found") {
-                console.log("Mail already registered");
-                return;
-            }
-            if (d.status == "error") {
-                console.error("Error while registering");
-            }
-            console.log("Inserted into database");
-        } else {
-            console.error("Invalid OTP");
-        }
-    } catch (e) {
-        console.error(e);
+    type.body = JSON.stringify({ otp: otp.value });
+    const res = await fetch("/insert", type);
+    const data = await res.json();
+    if (data.status == 303) {
+        alert("Send OTP First");
+        return;
     }
+
+    if (data.status == 302) {
+        alert("Mail Already Registered");
+        return;
+    }
+    if (data.status == 301) {
+        alert("Wrong OTP");
+        return;
+    }
+    alert("Verified");
 });
+
 (() => {
     const msg = "Welcome to Mail App";
     const len = msg.length;

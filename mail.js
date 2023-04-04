@@ -21,7 +21,7 @@ exports.sendMail = async function sendMail(recipient) {
     });
     const otp = Math.floor(Math.random() * 89999 + 10000);
     const option = {
-        from: `Aquib Alam ${process.env.user}`,
+        from: `Project@nazi.com`,
         to: recipient,
         subject: "Mail App",
         text: "",
