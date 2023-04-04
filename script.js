@@ -22,7 +22,7 @@ sendBtn.addEventListener("click", async () => {
         alert("Error while sending mail...Please check the mail again..");
         return;
     }
-    alert("Otp sent");
+    alert("OTP sent");
 });
 checkBtn.addEventListener("click", async () => {
     type.body = JSON.stringify({ mail: mail.value, otp: otp.value });
@@ -44,7 +44,7 @@ checkBtn.addEventListener("click", async () => {
         alert("Error while Verifying");
         return;
     }
-    alert("Verified");
+    alert("OTP Verified");
 });
 
 (() => {
