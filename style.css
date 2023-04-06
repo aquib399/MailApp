@@ -4,6 +4,7 @@ body {
     font-family: "Enriqueta";
     display: flex;
     justify-content: center;
+    text-align: center;
     min-height: 90vh;
 }
 p {
@@ -37,8 +38,8 @@ button:active {
     background-color: rgb(180, 180, 180);
 }
 .text {
-    width: 80%;
-    margin-top: 10vh;
+    min-height: 90vh;
+    width: 95%;
     position: relative;
     text-align: center;
     display: flex;
@@ -76,5 +77,39 @@ button:active {
     }
     100% {
         background-position: 0% 50%;
+    }
+}
+@media only screen and (max-width: 555px) {
+    p {
+        font-size: 35px;
+    }
+    input {
+        font-size: 18px;
+        width: 300px;
+        border-radius: 1vh;
+        font-family: "Enriqueta";
+    }
+    button {
+        font-family: "Enriqueta";
+        border-radius: 1vh;
+        width: 306px;
+    }
+}
+@media only screen and (max-width: 440px) {
+    p {
+        font-size: 30px;
+    }
+    input {
+        width: 230px;
+        border-radius: 1vh;
+    }
+    button {
+        border-radius: 1vh;
+        width: 236px;
+    }
+}
+@media only screen and (max-width: 370px) {
+    p {
+        font-size: 28px;
     }
 }
