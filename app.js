@@ -53,4 +53,4 @@ app.post("/insert", async (req, res) => {
     res.send({ status: 401 });
 });
 
-app.listen(process.env.PORT, console.log(`Listening at http://localhost:${process.env.port}`));
+app.listen(process.env.PORT);
