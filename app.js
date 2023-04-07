@@ -20,14 +20,15 @@ app.post("/send", async (req, res) => {
     mail = req.body.mail;
     try {
         if (await db.findOne({ mail })) {
-            res.send({ status: 302 });
+            // res.send({ status: 302 });
+            throw { status: 302 };
             return;
         }
         otp = await require("./mail").sendMail(mail);
         flag = true;
         res.send({ status: 200 });
     } catch (e) {
-        res.send({ status: 500 });
+        res.send({ status: e.status || 500 });
     }
 });
 app.post("/insert", async (req, res) => {

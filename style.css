@@ -6,6 +6,7 @@ body {
     justify-content: center;
     text-align: center;
     min-height: 90vh;
+    margin-top: 5vh;
 }
 p {
     font-size: 40px;
@@ -21,7 +22,7 @@ button {
     margin-bottom: 7px;
 }
 input {
-    font-family: consolas;
+    font-family: "consolas";
     outline: none;
     text-align: center;
 }
@@ -41,7 +42,6 @@ button:active {
     min-height: 90vh;
     width: 95%;
     position: relative;
-    text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -64,11 +64,11 @@ button:active {
     background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82);
     border-radius: calc(2 * var(--borderWidth));
     z-index: -1;
-    animation: animatedgradient 5s ease alternate infinite;
+    animation: gradient 3s ease alternate infinite;
     background-size: 300% 300%;
 }
 
-@keyframes animatedgradient {
+@keyframes gradient {
     0% {
         background-position: 0% 50%;
     }
@@ -80,6 +80,9 @@ button:active {
     }
 }
 @media only screen and (max-width: 555px) {
+body{
+    margin-top: 1.5vh;
+}
     p {
         font-size: 35px;
     }
@@ -87,10 +90,8 @@ button:active {
         font-size: 18px;
         width: 300px;
         border-radius: 1vh;
-        font-family: "Enriqueta";
     }
     button {
-        font-family: "Enriqueta";
         border-radius: 1vh;
         width: 306px;
     }
@@ -98,6 +99,9 @@ button:active {
 @media only screen and (max-width: 440px) {
     p {
         font-size: 30px;
+    }
+    #mail {
+        font-size: 15px;
     }
     input {
         width: 230px;
