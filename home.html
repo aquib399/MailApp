@@ -14,18 +14,22 @@
         <div class="text">
             <p>W</p>
             <div class="cont">
-                <div class="mail">
-                    <input type="text" id="mail" placeholder="Email here..." />
-                    <div>
-                        <button id="sendBtn">SEND</button>
+                <form onsubmit="sendMail();return false;">
+                    <div class="mail">
+                        <input type="text" id="mail" placeholder="Email here..." required />
+                        <div>
+                            <button id="sendBtn">SEND</button>
+                        </div>
                     </div>
-                </div>
-                <div class="otp">
-                    <input type="text" id="otp" placeholder="OTP here..." />
-                    <div>
-                        <button id="checkBtn">SUBMIT</button>
+                </form>
+                <form onsubmit="checkOtp();return false;">
+                    <div class="otp">
+                        <input type="number" id="otp" placeholder="OTP here..." required />
+                        <div>
+                            <button id="checkBtn">SUBMIT</button>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </body>

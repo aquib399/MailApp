@@ -53,6 +53,10 @@ button:active {
     color: rgb(20, 20, 20);
     background: white;
 }
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
 
 .text:after {
     content: "";
@@ -80,9 +84,9 @@ button:active {
     }
 }
 @media only screen and (max-width: 555px) {
-body{
-    margin-top: 1.5vh;
-}
+    body {
+        margin-top: 1.5vh;
+    }
     p {
         font-size: 35px;
     }

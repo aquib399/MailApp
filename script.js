@@ -1,5 +1,5 @@
-const sendBtn = document.getElementById("sendBtn");
-const checkBtn = document.getElementById("checkBtn");
+// const sendBtn = document.getElementById("sendBtn");
+// const checkBtn = document.getElementById("checkBtn");
 const pg = document.querySelector("p");
 const mail = document.getElementById("mail");
 const otp = document.getElementById("otp");
@@ -10,7 +10,7 @@ const type = {
     },
 };
 
-sendBtn.addEventListener("click", async () => {
+async function sendMail() {
     type.body = JSON.stringify({ mail: mail.value });
     const res = await fetch("/send", type);
     const data = await res.json();
@@ -23,8 +23,8 @@ sendBtn.addEventListener("click", async () => {
         return;
     }
     alert("OTP sent");
-});
-checkBtn.addEventListener("click", async () => {
+}
+async function checkOtp() {
     type.body = JSON.stringify({ otp: otp.value });
     const res = await fetch("/insert", type);
     const data = await res.json();
@@ -45,7 +45,7 @@ checkBtn.addEventListener("click", async () => {
         return;
     }
     alert("OTP Verified");
-});
+}
 
 (() => {
     const msg = "Welcome to Mail App";
