@@ -39,7 +39,6 @@ button:active {
     background-color: rgb(180, 180, 180);
 }
 .text {
-    min-height: 90vh;
     width: 95%;
     position: relative;
     display: flex;
@@ -85,7 +84,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 @media only screen and (max-width: 555px) {
     body {
-        margin-top: 1.5vh;
+        margin-top: 1vh;
     }
     p {
         font-size: 35px;

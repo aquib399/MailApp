@@ -13,7 +13,7 @@ let flag = false;
 
 app.get("/", (req, res) => {
     flag = false;
-    res.sendFile(__dirname + "/home.html");
+    res.sendFile(__dirname + "/pages/home.html");
 });
 
 app.post("/send", async (req, res) => {
@@ -24,7 +24,7 @@ app.post("/send", async (req, res) => {
             throw { status: 302 };
             return;
         }
-        otp = await require("./mail").sendMail(mail);
+        otp = await require("./scripts/mail").sendMail(mail);
         flag = true;
         res.send({ status: 200 });
     } catch (e) {
