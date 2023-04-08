@@ -7,9 +7,9 @@ const db = client.db("MailApp").collection("data");
 app.use(express.json());
 app.use(express.static(__dirname));
 client.connect();
-let mail;
-let otp;
-let flag = false;
+let mail,
+    otp,
+    flag = false;
 
 app.get("/", (req, res) => {
     flag = false;
@@ -20,7 +20,6 @@ app.post("/send", async (req, res) => {
     mail = req.body.mail;
     try {
         if (await db.findOne({ mail })) {
-            // res.send({ status: 302 });
             throw { status: 302 };
             return;
         }

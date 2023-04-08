@@ -7,7 +7,7 @@
         "nodemailer": "^6.9.1",
         "nodemon": "^2.0.22"
     },
-    "name": "mailapp",
+    "name": "MailApp",
     "version": "1.0.0",
     "main": "app.js",
     "scripts": {
@@ -16,5 +16,5 @@
     },
     "author": "Aquib",
     "license": "ISC",
-    "description": "Mail Application"
+    "description": "A simple SMTP Mail Application"
 }

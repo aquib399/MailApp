@@ -1,6 +1,3 @@
-// const sendBtn = document.getElementById("sendBtn");
-// const checkBtn = document.getElementById("checkBtn");
-const pg = document.querySelector("p");
 const mail = document.getElementById("mail");
 const otp = document.getElementById("otp");
 const type = {
@@ -48,11 +45,11 @@ async function checkOtp() {
 }
 
 (() => {
+    const pg = document.querySelector("p");
     const msg = "Welcome to Mail App";
-    const len = msg.length;
-    let str = "";
-    let cnt = 0;
+    let str = "",
+        cnt = 0;
     const x = setInterval(() => {
-        len > cnt ? ((str += msg[cnt++]), (pg.innerHTML = str + "_")) : (clearInterval(x), (pg.innerHTML = str));
+        msg.length > cnt ? ((str += msg[cnt++]), (pg.innerHTML = str + "_")) : (clearInterval(x), (pg.innerHTML = str));
     }, 80);
 })();
