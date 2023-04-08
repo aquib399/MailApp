@@ -9,29 +9,42 @@ app.use(express.static(__dirname));
 client.connect();
 let mail,
     otp,
-    flag = false;
-
+    dt,
+    flag = false,
+    sent = false;
+function checkTime() {
+    let tmp = Date.now();
+    if (tmp - 30000 >= dt) {
+        return false;
+    }
+    return 30000 - (tmp - dt);
+}
 app.get("/", (req, res) => {
-    flag = false;
+    sent = false;
     res.sendFile(__dirname + "/pages/home.html");
 });
 
 app.post("/send", async (req, res) => {
     mail = req.body.mail;
+    let time = checkTime();
     try {
+        if (sent && time) {
+            throw { status: 412, time };
+        }
         if (await db.findOne({ mail })) {
             throw { status: 302 };
-            return;
         }
         otp = await require("./scripts/mail").sendMail(mail);
-        flag = true;
+        console.log(otp);
+        sent = true;
+        dt = Date.now();
         res.send({ status: 200 });
     } catch (e) {
-        res.send({ status: e.status || 500 });
+        res.send({ status: e.status || 500, time: Math.round(e.time / 1000) });
     }
 });
 app.post("/insert", async (req, res) => {
-    if (!flag) {
+    if (!sent) {
         res.send({ status: 203 });
         return;
     }
@@ -42,7 +55,7 @@ app.post("/insert", async (req, res) => {
                 return;
             }
             await db.insertOne({ mail });
-            flag = false;
+            sent = false;
             res.send({ status: 200 });
         } catch (e) {
             res.send({ status: 500 });

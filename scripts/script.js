@@ -11,6 +11,10 @@ async function sendMail() {
     type.body = JSON.stringify({ mail: mail.value });
     const res = await fetch("../send", type);
     const data = await res.json();
+    if (data.status == 412) {
+        alert("Please wait " + data.time + " seconds before sending again");
+        return;
+    }
     if (data.status == 302) {
         alert("Mail Already Registered");
         return;
