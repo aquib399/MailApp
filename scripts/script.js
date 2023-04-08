@@ -12,7 +12,7 @@ const type = {
 
 async function sendMail() {
     type.body = JSON.stringify({ mail: mail.value });
-    const res = await fetch("/send", type);
+    const res = await fetch("../send", type);
     const data = await res.json();
     if (data.status == 302) {
         alert("Mail Already Registered");
@@ -26,7 +26,7 @@ async function sendMail() {
 }
 async function checkOtp() {
     type.body = JSON.stringify({ otp: otp.value });
-    const res = await fetch("/insert", type);
+    const res = await fetch("../insert", type);
     const data = await res.json();
     if (data.status == 203) {
         alert("Send OTP First");
