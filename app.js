@@ -23,7 +23,9 @@ app.get("/", (req, res) => {
     sent = false;
     res.sendFile(__dirname + "/pages/home.html");
 });
-
+app.get("/clip", (req, res) => {
+    res.sendFile(__dirname + "/pages/clip.html");
+});
 app.post("/send", async (req, res) => {
     mail = req.body.mail;
     let time = checkTime();
