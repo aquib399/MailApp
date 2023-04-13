@@ -2,8 +2,8 @@
     "dependencies": {
         "dotenv": "^16.0.3",
         "express": "^4.18.2",
-        "googleapis": "^114.0.0",
-        "mongodb": "^5.1.0",
+        "googleapis": "^117.0.0",
+        "mongodb": "^5.2.0",
         "nodemailer": "^6.9.1",
         "nodemon": "^2.0.22"
     },

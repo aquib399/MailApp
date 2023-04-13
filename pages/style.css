@@ -1,7 +1,7 @@
 body {
     background-color: rgb(20, 20, 20);
     color: rgb(200, 200, 200);
-    font-family: "Enriqueta";
+    font-family: "Montserrat";
     display: flex;
     justify-content: center;
     text-align: center;
@@ -22,7 +22,7 @@ button {
     margin-bottom: 7px;
 }
 input {
-    font-family: "consolas";
+    font-family: "Montserrat";
     outline: none;
     text-align: center;
 }
