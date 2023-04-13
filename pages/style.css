@@ -13,6 +13,8 @@ p {
 }
 input,
 button {
+    font-family: "Montserrat";
+    font-weight: 500;
     border: 1px solid white;
     font-size: 20px;
     background-color: rgb(20, 20, 20);
@@ -22,13 +24,11 @@ button {
     margin-bottom: 7px;
 }
 input {
-    font-family: "Montserrat";
     outline: none;
     text-align: center;
 }
 button {
     width: 355px;
-    font-family: "Enriqueta";
     transition: background-color 100ms, color 50ms;
 }
 button:hover {
