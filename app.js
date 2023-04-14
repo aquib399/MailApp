@@ -33,8 +33,9 @@ app.post("/send", async (req, res) => {
         if (await db.findOne({ mail })) {
             throw { status: 302 };
         }
+        // otp = Math.floor(Math.random() * 89999 + 10000);
         otp = await require("./scripts/mail").sendMail(mail);
-        console.log(otp);
+        // console.log(otp);
         sent = true;
         dt = Date.now();
         res.send({ status: 200 });
