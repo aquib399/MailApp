@@ -74,8 +74,12 @@ function thank() {
                 </div>
             </div>
             <footer style="position: fixed; bottom: 10%">
-                <img src="../pages/insta.png" alt="Instagram" style="filter: invert(100%); margin: 3px; width: 35px" />
-                <img src="../pages/linked.png" alt="Linkedin" style="filter: invert(100%); margin: 3px; width: 35px" />
+                <a href="https://www.instagram.com/aquib399">
+                    <img src="../pages/insta.png" alt="Instagram" style="filter: invert(100%); margin: 3px; width: 35px" />
+                </a>
+                <a href="https://www.linkedin.com/in/aquib-alam/">
+                    <img src="../pages/linked.png" alt="Linkedin" style="filter: invert(100%); margin: 3px; width: 35px" />
+                </a>
             </footer>
         </body>
     </html>
@@ -84,6 +88,18 @@ function thank() {
         ::selection {
             background-color: white;
             color: black;
+        }
+        a:link {
+            text-decoration: none;
+        }
+        a:visited {
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: none;
+        }
+        a:active {
+            text-decoration: none;
         }
     </style>
     <script>
