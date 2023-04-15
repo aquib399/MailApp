@@ -16,7 +16,7 @@ async function sendMail() {
         return;
     }
     if (data.status == 302) {
-        alert("Mail Already Registered");
+        document.write(thank("Thank you.. The mail is already registered"));
         return;
     }
     if (data.status == 500) {
@@ -57,7 +57,10 @@ async function checkOtp() {
         msg.length > cnt ? ((str += msg[cnt++]), (pg.innerHTML = str + String.fromCharCode(Math.floor(Math.random() * 89 + 33)))) : (clearInterval(x), (pg.innerHTML = str));
     }, 80);
 })();
-function thank() {
+function thank(msg) {
+    if (msg == undefined) {
+        msg = "Thank you for being part of us";
+    }
     return `<!DOCTYPE html>
     <html lang="en">
         <head>
@@ -105,7 +108,7 @@ function thank() {
     <script>
         (() => {
             const pg = document.getElementById("tnk");
-            const msg = "Thank you for being part of us";
+            const msg = "${msg}";
             let str = "",
                 cnt = 0;
             function ran() {
