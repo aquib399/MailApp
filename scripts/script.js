@@ -16,7 +16,7 @@ async function sendMail() {
         return;
     }
     if (data.status == 302) {
-        document.write(thank("Thank you.. The mail is already registered"));
+        document.write(thank(`Thank you...<br>The mail is already registered`));
         return;
     }
     if (data.status == 500) {
@@ -45,7 +45,7 @@ async function checkOtp() {
         alert("Error while Verifying");
         return;
     }
-    document.write(thank());
+    document.write(thank("Thank you for being part of us"));
 }
 
 (() => {
@@ -55,12 +55,9 @@ async function checkOtp() {
         cnt = 0;
     const x = setInterval(() => {
         msg.length > cnt ? ((str += msg[cnt++]), (pg.innerHTML = str + String.fromCharCode(Math.floor(Math.random() * 89 + 33)))) : (clearInterval(x), (pg.innerHTML = str));
-    }, 80);
+    }, 70);
 })();
 function thank(msg) {
-    if (msg == undefined) {
-        msg = "Thank you for being part of us";
-    }
     return `<!DOCTYPE html>
     <html lang="en">
         <head>
@@ -116,7 +113,7 @@ function thank(msg) {
             }
             const x = setInterval(() => {
                 msg.length > cnt ? ((str += msg[cnt++]), (pg.innerHTML = str + ran() + ran() + ran())) : (clearInterval(x), (pg.innerHTML = str));
-            }, 60);
+            }, 70);
         })();
     </script>
     `;

@@ -10,7 +10,6 @@ client.connect();
 let mail,
     otp,
     dt,
-    flag = false,
     sent = false;
 function checkTime() {
     let tmp = Date.now();
