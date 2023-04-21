@@ -1,6 +1,6 @@
 const mail = document.getElementById("mail");
 const otp = document.getElementById("otp");
-let m;
+let m = false;
 const type = {
     method: "post",
     headers: {
@@ -8,8 +8,7 @@ const type = {
     },
 };
 async function sendMail() {
-    m = mail.value;
-    type.body = JSON.stringify({ mail: m });
+    type.body = JSON.stringify({ mail: mail.value });
     const res = await fetch("../send", type);
     const data = await res.json();
     if (data.status == 412) {
@@ -24,17 +23,19 @@ async function sendMail() {
         alert("Error while sending mail...Please check the mail again..");
         return;
     }
+    m = mail.value;
     alert("OTP sent");
 }
 async function checkOtp() {
-    type.body = JSON.stringify({ mail: m, otp: otp.value });
-    const res = await fetch("../insert", type);
-    const data = await res.json();
-    console.log(data.status)
-    if (data.status == 203) {
+    if (!m) {
         alert("Send OTP First");
         return;
     }
+    m = false;
+    type.body = JSON.stringify({ mail: m, otp: otp.value });
+    const res = await fetch("../insert", type);
+    const data = await res.json();
+    console.log(data.status);
     if (data.status == 401) {
         alert("Wrong OTP");
         return;
