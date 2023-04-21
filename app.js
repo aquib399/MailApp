@@ -1,4 +1,5 @@
 require("dotenv").config();
+const e = require("express");
 const express = require("express");
 const app = express();
 const { MongoClient } = require("mongodb");
@@ -7,61 +8,95 @@ const db = client.db("MailApp").collection("data");
 app.use(express.json());
 app.use(express.static(__dirname));
 client.connect();
-let mail,
-    otp,
-    dt,
-    sent = false;
-function checkTime() {
-    let tmp = Date.now();
-    if (tmp - 30000 >= dt) {
+let data = {};
+function checkTime(mail) {
+    let temp = Date.now();
+    if (temp - 30000 > data[mail].time) {
+        //Can send
         return false;
     }
-    return 30000 - (tmp - dt);
+    //Can not send
+    let remaining = Math.round((30000 - (temp - data[mail].time)) / 1000);
+    return remaining;
 }
+
 app.get("/", (req, res) => {
-    sent = false;
     res.sendFile(__dirname + "/pages/home.html");
 });
+
 app.post("/send", async (req, res) => {
-    mail = req.body.mail;
-    let time = checkTime();
+    let mail = req.body.mail;
     try {
-        if (sent && time) {
-            throw { status: 412, time };
+        //check if the otp was sent or not
+        if (data[mail]) {
+            //check if 30 seconds are passed or not
+            const time = checkTime(mail);
+            if (time) {
+                //Cant send because its already sent
+                console.log("Please wait", time, "seconds");
+                //Send response as already sent and the time remaining
+                throw { status: 412, time };
+                return;
+            }
         }
+        //check if the mail exist in the database or not
         if (await db.findOne({ mail })) {
+            console.log("Already exist");
             throw { status: 302 };
+            return;
         }
-        otp = await require("./scripts/mail").sendMail(mail);
-        // otp = Math.floor(Math.random() * 89999 + 10000);
-        console.log(otp);
-        sent = true;
-        dt = Date.now();
-        res.send({ status: 200 });
+        //create a instance(mail's details) in the data object
+        data[mail] = {};
+        // data[mail].otp = Math.floor(Math.random() * 89999 + 10000);
+        data[mail].otp = await require("./scripts/mail").sendMail(mail);
+        data[mail].time = Date.now();
+        console.log("Mail sent at->", mail, data[mail].otp);
+        //Send response as 'Mail sent'
+        throw { status: 200 };
     } catch (e) {
-        res.send({ status: e.status || 500, time: Math.round(e.time / 1000) });
+        res.send({ status: e.status || 500, time: e.time });
     }
 });
 app.post("/insert", async (req, res) => {
-    if (!sent) {
-        res.send({ status: 203 });
-        return;
-    }
-    if (otp == req.body.otp) {
-        try {
-            if (await db.findOne({ mail })) {
-                res.send({ status: 302 });
-                return;
-            }
-            await db.insertOne({ mail });
-            sent = false;
-            res.send({ status: 200 });
-        } catch (e) {
-            res.send({ status: 500 });
+    //Gather the body data
+    let mail = req.body.mail;
+    let otp = req.body.otp;
+    try {
+        //check if the mail exist in the database or not
+        if (await db.findOne({ mail })) {
+            console.log("Already exist");
+            throw { status: 302 };
         }
-        return;
+        //check the corrosponding body.data from data object
+        if (data[mail].otp == otp) {
+            //OTP verified
+            await db.insertOne({ mail });
+            delete data[mail];
+            console.log("Verified & inserted");
+            //send response as successfully inserted
+            throw { status: 200 };
+        }
+        //Not verfied
+        console.log("Wrong otp");
+        // send response as not verfied
+        throw { status: 401 };
+    } catch (e) {
+        res.send({ status: e.status });
     }
-    res.send({ status: 401 });
+});
+app.listen(3000, () => {
+    console.clear();
+    console.log("http://localhost:3000");
 });
 
-app.listen(process.env.PORT, console.log(`Listening at http://localhost:${process.env.PORT}`));
+//For deleting the mail's details if not verfied in 30 seconds in every 5 minutes
+setInterval(() => {
+    let temp = Date.now();
+    Object.entries(data).forEach(([key, val]) => {
+        console.log({ key, val });
+        if (temp - 30000 > val.time) {
+            delete data[key];
+        }
+    });
+    console.log();
+}, 300000);

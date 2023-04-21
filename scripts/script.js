@@ -1,14 +1,15 @@
 const mail = document.getElementById("mail");
 const otp = document.getElementById("otp");
+let m;
 const type = {
     method: "post",
     headers: {
         "Content-Type": "application/json",
     },
 };
-
 async function sendMail() {
-    type.body = JSON.stringify({ mail: mail.value });
+    m = mail.value;
+    type.body = JSON.stringify({ mail: m });
     const res = await fetch("../send", type);
     const data = await res.json();
     if (data.status == 412) {
@@ -26,9 +27,10 @@ async function sendMail() {
     alert("OTP sent");
 }
 async function checkOtp() {
-    type.body = JSON.stringify({ otp: otp.value });
+    type.body = JSON.stringify({ mail: m, otp: otp.value });
     const res = await fetch("../insert", type);
     const data = await res.json();
+    console.log(data.status)
     if (data.status == 203) {
         alert("Send OTP First");
         return;
