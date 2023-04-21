@@ -1,4 +1,4 @@
-const mail = document.getElementById("mail");
+const Mail = document.getElementById("mail");
 const otp = document.getElementById("otp");
 let m = false;
 const type = {
@@ -8,7 +8,12 @@ const type = {
     },
 };
 async function sendMail() {
-    type.body = JSON.stringify({ mail: mail.value });
+    const mail = Mail.value;
+    if (!mail.includes("@") && mail.length >= 3) {
+        alert("Please enter a valid mail");
+        return;
+    }
+    type.body = JSON.stringify({ mail });
     const res = await fetch("../send", type);
     const data = await res.json();
     if (data.status == 412) {
@@ -23,7 +28,7 @@ async function sendMail() {
         alert("Error while sending mail...Please check the mail again..");
         return;
     }
-    m = mail.value;
+    m = mail;
     alert("OTP sent");
 }
 async function checkOtp() {
