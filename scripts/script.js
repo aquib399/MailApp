@@ -77,7 +77,7 @@ function thank(msg) {
         <body style="background-color: black; display: flex; justify-content: center; align-items: center; min-height: 90vh">
             <div class="container" style="display: flex; justify-content: center; text-align: center">
                 <div class="item">
-                    <img src="./tick.png" alt="" width="70px" />
+                    <img src="../pages/tick.png" alt="" width="70px" />
                     <p id="tnk" style="font-family: Montserrat; font-size: large; color: white; text-shadow: 0px 0px 50px white; -webkit-box-reflect: below 0px linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1))"></p>
                 </div>
             </div>
