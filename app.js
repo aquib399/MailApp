@@ -33,24 +33,20 @@ app.post("/send", async (req, res) => {
             const time = checkTime(mail);
             if (time) {
                 // Cant send because its already sent
-                // console.log("Please wait", time, "seconds");
                 // Send response as already sent and the time remaining
                 throw { status: 412, time };
-                return;
             }
         }
         // check if the mail exist in the database or not
         if (await db.findOne({ mail })) {
-            // console.log("Already exist");
+            // Already exist
             throw { status: 302 };
-            return;
         }
         // create a instance(mail's details) in the data object
         data[mail] = {};
         // data[mail].otp = Math.floor(Math.random() * 89999 + 10000);
         data[mail].otp = await require("./scripts/mail").sendMail(mail);
         data[mail].time = Date.now();
-        // console.log("Mail sent at->", mail, data[mail].otp);
         // Send response as 'Mail sent'
         throw { status: 200 };
     } catch (e) {
@@ -64,7 +60,7 @@ app.post("/insert", async (req, res) => {
     try {
         // check if the mail exist in the database or not
         if (await db.findOne({ mail })) {
-            // console.log("Already exist");
+            // Already exist
             throw { status: 302 };
         }
         // check the corrosponding body.data from data object
@@ -72,12 +68,11 @@ app.post("/insert", async (req, res) => {
             //OTP verified
             await db.insertOne({ mail });
             delete data[mail];
-            // console.log("Verified & inserted");
             // send response as successfully inserted
             throw { status: 200 };
         }
         // Not verfied
-        // console.log("Wrong otp");
+        // Wrong otp
         // send response as not verfied
         throw { status: 401 };
     } catch (e) {
