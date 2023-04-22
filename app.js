@@ -33,7 +33,7 @@ app.post("/send", async (req, res) => {
             const time = checkTime(mail);
             if (time) {
                 // Cant send because its already sent
-                // Send response as already sent and the time remaining
+                // Send response as already sent and the remaining time
                 throw { status: 412, time };
             }
         }
@@ -71,7 +71,6 @@ app.post("/insert", async (req, res) => {
             // send response as successfully inserted
             throw { status: 200 };
         }
-        // Not verfied
         // Wrong otp
         // send response as not verfied
         throw { status: 401 };

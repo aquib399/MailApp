@@ -9,7 +9,7 @@ const type = {
 };
 async function sendMail() {
     const mail = Mail.value;
-    if (!mail.includes("@") && mail.length >= 3) {
+    if (!mail.includes("@") && mail.length >= 5) {
         alert("Please enter a valid mail");
         return;
     }
@@ -82,10 +82,10 @@ function thank(msg) {
                 </div>
             </div>
             <footer style="position: fixed; bottom: 10%">
-                <a href="https://www.instagram.com/aquib399">
+                <a href="https://www.instagram.com/aquib399" target="_blank">
                     <img src="../pages/insta.png" alt="Instagram" style="filter: invert(100%); margin: 3px; width: 35px" />
                 </a>
-                <a href="https://www.linkedin.com/in/aquib-alam/">
+                <a href="https://www.linkedin.com/in/aquib-alam/" target="_blank">
                     <img src="../pages/linked.png" alt="Linkedin" style="filter: invert(100%); margin: 3px; width: 35px" />
                 </a>
             </footer>
