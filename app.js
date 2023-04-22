@@ -80,7 +80,7 @@ app.post("/insert", async (req, res) => {
 });
 app.listen(3000);
 
-// For deleting the mail's details if not verfied in 30 seconds in every 5 minutes
+// For deleting the mail's details if not verfied in 30 seconds in every 10 minutes
 setInterval(() => {
     let temp = Date.now() - 30000;
     Object.entries(data).forEach(([key, val]) => {
@@ -89,4 +89,4 @@ setInterval(() => {
             delete data[key];
         }
     });
-}, 300000);
+}, 600000);
