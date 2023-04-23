@@ -36,11 +36,9 @@ async function checkOtp() {
         alert("Send OTP First");
         return;
     }
-    m = false;
     type.body = JSON.stringify({ mail: m, otp: otp.value });
     const res = await fetch("../insert", type);
     const data = await res.json();
-    console.log(data.status);
     if (data.status == 401) {
         alert("Wrong OTP");
         return;
