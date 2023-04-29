@@ -10,8 +10,8 @@ app.use(express.static(__dirname));
 client.connect();
 let data = {};
 function checkTime(mail) {
-    let temp = Date.now();
-    if (temp - 30000 > data[mail].time) {
+    let temp = Date.now() - 30000;
+    if (temp >= data[mail].time) {
         // Can send
         return false;
     }
@@ -47,6 +47,7 @@ app.post("/send", async (req, res) => {
         // data[mail].otp = Math.floor(Math.random() * 89999 + 10000);
         data[mail].otp = await require("./scripts/mail").sendMail(mail);
         data[mail].time = Date.now();
+        // console.log(mail, ":", data[mail].otp);
         // Send response as 'Mail sent'
         throw { status: 200 };
     } catch (e) {
@@ -85,7 +86,7 @@ setInterval(() => {
     let temp = Date.now() - 30000;
     Object.entries(data).forEach(([key, val]) => {
         // console.log({ key, val });
-        if (temp > val.time) {
+        if (temp >= val.time) {
             delete data[key];
         }
     });

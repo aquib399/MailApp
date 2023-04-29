@@ -118,7 +118,9 @@ function thank(msg) {
                 return String.fromCharCode(Math.floor(Math.random() * 89 + 33));
             }
             const x = setInterval(() => {
-                msg.length > cnt ? ((str += msg[cnt++]), (pg.innerHTML = str + ran() + ran() + ran())) : (clearInterval(x), (pg.innerHTML = str));
+                msg.length > cnt ?
+                ((str += msg[cnt++]), (pg.innerHTML = str + ran() + ran() + ran())) :
+                (clearInterval(x), (pg.innerHTML = str));
             }, 70);
         })();
     </script>
