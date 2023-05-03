@@ -47,7 +47,7 @@ app.post("/send", async (req, res) => {
         // data[mail].otp = Math.floor(Math.random() * 89999 + 10000);
         data[mail].otp = await require("./scripts/mail").sendMail(mail);
         data[mail].time = Date.now();
-        // console.log(mail, ":", data[mail].otp);
+        console.log(mail, ":", data[mail].otp);
         // Send response as 'Mail sent'
         throw { status: 200 };
     } catch (e) {
