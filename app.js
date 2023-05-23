@@ -25,14 +25,14 @@ app.get("/", (req, res) => {
 });
 
 app.post("/send", async (req, res) => {
-    let mail = req.body.mail;
+    const mail = req.body.mail;
     try {
         // check if the otp was sent or not
         if (data[mail]) {
             // check if 30 seconds are passed or not
             const time = checkTime(mail);
             if (time) {
-                // Cant send because its already sent
+                // Cant send because its already sents
                 // Send response as already sent and the remaining time
                 throw { status: 412, time };
             }
@@ -56,8 +56,8 @@ app.post("/send", async (req, res) => {
 });
 app.post("/insert", async (req, res) => {
     // Gather the body data
-    let mail = req.body.mail;
-    let otp = req.body.otp;
+    const mail = req.body.mail;
+    const otp = req.body.otp;
     try {
         // check if the mail exist in the database or not
         if (await db.findOne({ mail })) {
@@ -83,7 +83,7 @@ app.listen(3000);
 
 // For deleting the mail's details if not verfied in 30 seconds in every 10 minutes
 setInterval(() => {
-    let temp = Date.now() - 30000;
+    const temp = Date.now() - 30000;
     Object.entries(data).forEach(([key, val]) => {
         // console.log({ key, val });
         if (temp >= val.time) {
