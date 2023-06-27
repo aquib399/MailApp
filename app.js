@@ -29,10 +29,10 @@ app.post("/send", async (req, res) => {
     try {
         // check if the otp was sent or not
         if (data[mail]) {
-            // check if 30 seconds are passed or not
+            // check if 30 seconds have passed or not
             const time = checkTime(mail);
             if (time) {
-                // Cant send because its already sents
+                // Can't send because its already sent
                 // Send response as already sent and the remaining time
                 throw { status: 412, time };
             }
@@ -43,7 +43,7 @@ app.post("/send", async (req, res) => {
             throw { status: 302 };
         }
         // create a instance(mail's details) in the data object
-        data[mail] = {};
+        data[mail] = { time: 1 };
         // data[mail].otp = Math.floor(Math.random() * 89999 + 10000);
         data[mail].otp = await require("./scripts/mail").sendMail(mail);
         data[mail].time = Date.now();
@@ -66,7 +66,7 @@ app.post("/insert", async (req, res) => {
         }
         // check the corrosponding body.data from data object
         if (data[mail].otp == otp) {
-            //OTP verified
+            // OTP verified
             await db.insertOne({ mail });
             delete data[mail];
             // send response as successfully inserted
@@ -81,7 +81,7 @@ app.post("/insert", async (req, res) => {
 });
 app.listen(3000);
 
-// For deleting the mail's details if not verfied in 30 seconds in every 10 minutes
+// For deleting the mail's details if not verfied within 30 seconds for every 10 minutes
 setInterval(() => {
     const temp = Date.now() - 30000;
     Object.entries(data).forEach(([key, val]) => {
