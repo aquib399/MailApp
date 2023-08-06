@@ -1,36 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="A simple Mail App" />
-        <link rel="stylesheet" type="text/css" href="../pages/style.css" />
-        <link rel="icon" href="https://imgtr.ee/images/2023/04/08/kXKNQ.png" />
-        <title>MailApp</title>
-    </head>
-    <body>
-        <div class="text">
-            <p>W</p>
-            <div class="cont">
-                <form onsubmit="sendMail();return false;">
-                    <div class="mail">
-                        <input type="email" id="mail" placeholder="Email here..." required />
-                        <div>
-                            <button id="sendBtn">SEND</button>
-                        </div>
-                    </div>
-                </form>
-                <form onsubmit="checkOtp();return false;">
-                    <div class="otp">
-                        <input type="number" id="otp" placeholder="OTP here..." required />
-                        <div>
-                            <button id="checkBtn">SUBMIT</button>
-                        </div>
-                    </div>
-                </form>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A simple Mail App" />
+    <link rel="stylesheet" type="text/css" href="../pages/style.css" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='5em' viewBox='0 0 512 512'%3E%3Cpath d='M64 112c-8.8 0-16 7.2-16 16v22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1V128c0-8.8-7.2-16-16-16H64zM48 212.2V384c0 8.8 7.2 16 16 16H448c8.8 0 16-7.2 16-16V212.2L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64H448c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128z' fill='%23ffffff' /%3E%3C/svg%3E"
+      type="image/svg+xml"
+    />
+    <title>MailApp</title>
+  </head>
+  <body>
+    <div class="text">
+      <p>W</p>
+      <div class="cont">
+        <form onsubmit="sendMail();return false;">
+          <div class="mail">
+            <input type="email" id="mail" placeholder="Email here..." required />
+            <div>
+              <button id="sendBtn">SEND</button>
             </div>
-        </div>
-    </body>
+          </div>
+        </form>
+        <form onsubmit="checkOtp();return false;">
+          <div class="otp">
+            <input type="number" id="otp" placeholder="OTP here..." required />
+            <div>
+              <button id="checkBtn">SUBMIT</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
 </html>
 <script src="../scripts/script.js"></script>
