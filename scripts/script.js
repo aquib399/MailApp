@@ -2,69 +2,69 @@ const Mail = document.getElementById("mail");
 const otp = document.getElementById("otp");
 let m = false;
 const type = {
-    method: "post",
-    headers: {
-        "Content-Type": "application/json",
-    },
+  method: "post",
+  headers: {
+    "Content-Type": "application/json",
+  },
 };
 async function sendMail() {
-    const mail = Mail.value;
-    if (!mail.includes("@") && mail.length >= 5) {
-        alert("Please enter a valid mail");
-        return;
-    }
-    type.body = JSON.stringify({ mail });
-    const res = await fetch("../send", type);
-    const data = await res.json();
-    if (data.status == 412) {
-        alert("Please wait " + data.time + " seconds before sending again");
-        return;
-    }
-    if (data.status == 302) {
-        document.write(thank(`Thank you...<br>The mail is already registered`));
-        return;
-    }
-    if (data.status == 500) {
-        alert("Error while sending mail...Please check the mail again..");
-        return;
-    }
-    m = mail;
-    alert("OTP sent");
+  const mail = Mail.value;
+  if (!mail.includes("@") && mail.length >= 5) {
+    alert("Please enter a valid mail");
+    return;
+  }
+  type.body = JSON.stringify({ mail });
+  const res = await fetch("../send", type);
+  const data = await res.json();
+  if (data.status == 412) {
+    alert("Please wait " + data.time + " seconds before sending again");
+    return;
+  }
+  if (data.status == 302) {
+    document.write(thank(`Thank you...<br>The mail is already registered`));
+    return;
+  }
+  if (data.status == 500) {
+    alert("Error while sending mail...Please check the mail again..");
+    return;
+  }
+  m = mail;
+  alert("OTP sent");
 }
 async function checkOtp() {
-    if (!m) {
-        alert("Send OTP First");
-        return;
-    }
-    type.body = JSON.stringify({ mail: m, otp: otp.value });
-    const res = await fetch("../insert", type);
-    const data = await res.json();
-    if (data.status == 401) {
-        alert("Wrong OTP");
-        return;
-    }
-    if (data.status == 302) {
-        alert("Mail Already Registered");
-        return;
-    }
-    if (data.status == 500) {
-        alert("Error while Verifying");
-        return;
-    }
-    document.write(thank("Thank you for being part of us"));
+  if (!m) {
+    alert("Send OTP First");
+    return;
+  }
+  type.body = JSON.stringify({ mail: m, otp: otp.value });
+  const res = await fetch("../insert", type);
+  const data = await res.json();
+  if (data.status == 401) {
+    alert("Wrong OTP");
+    return;
+  }
+  if (data.status == 302) {
+    alert("Mail Already Registered");
+    return;
+  }
+  if (data.status == 500) {
+    alert("Error while Verifying");
+    return;
+  }
+  document.write(thank("Thank you for being part of us"));
 }
 
 (() => {
-    const pg = document.querySelector("p");
-    const msg = "Welcome to Mail App";
-    let str = "",
-        cnt = 0;
-    const x = setInterval(() => {
-        msg.length > cnt ? ((str += msg[cnt++]), (pg.innerHTML = str + String.fromCharCode(Math.floor(Math.random() * 89 + 33)))) : (clearInterval(x), (pg.innerHTML = str));
-    }, 70);
+  const pg = document.querySelector("p");
+  const msg = "Welcome to Mail App";
+  let str = "",
+    cnt = 0;
+  const x = setInterval(() => {
+    msg.length > cnt ? ((str += msg[cnt++]), (pg.innerHTML = str + String.fromCharCode(Math.floor(Math.random() * 89 + 33)))) : (clearInterval(x), (pg.innerHTML = str));
+  }, 70);
 })();
 function thank(msg) {
-    return `<!DOCTYPE html>
+  return `<!DOCTYPE html>
     <html lang="en">
         <head>
             <meta charset="UTF-8" />
