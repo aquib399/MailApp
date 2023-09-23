@@ -9,16 +9,6 @@ app.use(express.json());
 app.use(express.static(__dirname));
 client.connect();
 let data = {};
-function checkTime(mail) {
-  let temp = Date.now() - 30000;
-  if (temp >= data[mail].time) {
-    // Can send
-    return false;
-  }
-  // Can not send
-  let remaining = Math.round((30000 - (temp - data[mail].time)) / 1000);
-  return remaining;
-}
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/pages/home.html");
@@ -83,6 +73,18 @@ app.post("/insert", async (req, res) => {
   }
 });
 app.listen(3000);
+
+
+function checkTime(mail) {
+  let temp = Date.now() - 30000;
+  if (temp >= data[mail].time) {
+    // Can send
+    return false;
+  }
+  // Can not send
+  let remaining = Math.round((30000 - (temp - data[mail].time)) / 1000);
+  return remaining;
+}
 
 // For deleting the mail's details if not verfied within 30 seconds for every 10 minutes
 setInterval(() => {

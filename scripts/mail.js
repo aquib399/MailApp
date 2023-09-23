@@ -18,6 +18,7 @@ exports.sendMail = async function sendMail(recipient) {
       accessToken: accessToken,
     },
   });
+  
   const otp = Math.floor(Math.random() * 89999 + 10000);
   const option = {
     from: ``,
