@@ -1,4 +1,3 @@
-require("dotenv").config();
 const express = require("express");
 const app = express();
 const { MongoClient } = require("mongodb");
@@ -73,7 +72,6 @@ app.post("/insert", async (req, res) => {
   }
 });
 app.listen(3000);
-
 
 function checkTime(mail) {
   let temp = Date.now() - 30000;
